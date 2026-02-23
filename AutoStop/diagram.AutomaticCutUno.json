@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 80, "left": -40, "attrs": {} },
+    { "type": "wokwi-lcd1602", "id": "lcd", "top": -210, "left": 20, "attrs": { "pins": "i2c" } },
+    { "type": "wokwi-ky-040", "id": "encoder", "top": 420, "left": 20, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_target_up",
+      "top": 90,
+      "left": 380,
+      "attrs": { "label": "T +", "color": "green" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_target_down",
+      "top": 150,
+      "left": 380,
+      "attrs": { "label": "T -", "color": "orange" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_hold",
+      "top": 210,
+      "left": 380,
+      "attrs": { "label": "HOLD/RESUME", "color": "blue" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_reset_dist",
+      "top": 270,
+      "left": 380,
+      "attrs": { "label": "RESET DIST", "color": "red" }
+    },
+    { "type": "wokwi-buzzer", "id": "buzzer", "top": 30, "left": 450, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": -30, "left": 450, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay1",
+      "top": 340,
+      "left": 410,
+      "attrs": { "label": "Cut Relay" }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "relay2",
+      "top": 420,
+      "left": 410,
+      "attrs": { "label": "Feed Motor Relay" }
+    }
+  ],
+  "connections": [
+    [ "uno:GND.1", "lcd:GND", "black", [ "v0" ] ],
+    [ "uno:5V", "lcd:VCC", "red", [ "v0" ] ],
+    [ "uno:A4", "lcd:SDA", "green", [ "v0" ] ],
+    [ "uno:A5", "lcd:SCL", "green", [ "v0" ] ],
+
+    [ "uno:GND.2", "encoder:GND", "black", [ "v0" ] ],
+    [ "uno:5V", "encoder:VCC", "red", [ "v0" ] ],
+    [ "uno:2", "encoder:CLK", "orange", [ "v0" ] ],
+    [ "uno:3", "encoder:DT", "yellow", [ "v0" ] ],
+
+    [ "uno:4", "btn_target_up:1.l", "green", [ "v0" ] ],
+    [ "uno:GND.3", "btn_target_up:2.l", "black", [ "v0" ] ],
+
+    [ "uno:5", "btn_target_down:1.l", "orange", [ "v0" ] ],
+    [ "uno:GND.4", "btn_target_down:2.l", "black", [ "v0" ] ],
+
+    [ "uno:7", "btn_hold:1.l", "blue", [ "v0" ] ],
+    [ "uno:GND.5", "btn_hold:2.l", "black", [ "v0" ] ],
+
+    [ "uno:6", "btn_reset_dist:1.l", "red", [ "v0" ] ],
+    [ "uno:GND.6", "btn_reset_dist:2.l", "black", [ "v0" ] ],
+
+    [ "uno:9", "buzzer:1", "purple", [ "v0" ] ],
+    [ "uno:GND.7", "buzzer:2", "black", [ "v0" ] ],
+
+    [ "uno:8", "led1:A", "magenta", [ "v0" ] ],
+    [ "uno:GND.8", "led1:C", "black", [ "v0" ] ],
+
+    [ "uno:10", "relay1:IN", "brown", [ "v0" ] ],
+    [ "uno:5V", "relay1:VCC", "red", [ "v0" ] ],
+    [ "uno:GND.9", "relay1:GND", "black", [ "v0" ] ],
+
+    [ "uno:11", "relay2:IN", "brown", [ "v0" ] ],
+    [ "uno:5V", "relay2:VCC", "red", [ "v0" ] ],
+    [ "uno:GND.10", "relay2:GND", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

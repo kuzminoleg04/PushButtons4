@@ -1,18 +1,19 @@
-#include <LiquidCrystal.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 
-LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 const int pinA = 2;
 const int pinB = 3;
-const int btnTargetUp = 13;
-const int btnTargetDown = 6;
-const int btnResetDist = 4;
-const int btnHold = 5;
+const int btnTargetUp = 4;
+const int btnTargetDown = 5;
+const int btnResetDist = 6;
+const int btnHold = 7;
 
-const int ledPin = 44;
-const int buzzerPin = 45;
-const int relayPin = 46;  // Connect your relay input here
-const int feedMotorPin = 47;  // Feed motor driver/relay control pin
+const int ledPin = 8;
+const int buzzerPin = 9;
+const int relayPin = 10;      // Cutter relay control
+const int feedMotorPin = 11;  // Feed motor relay control
 
 // Set to HIGH for active-high relay modules, LOW for active-low modules.
 const int relayActiveLevel = HIGH;
@@ -272,7 +273,8 @@ void renderDisplay(float currentCM, bool goalReached) {
 }
 
 void setup() {
-  lcd.begin(16, 2);
+  lcd.init();
+  lcd.backlight();
 
   pinMode(pinA, INPUT_PULLUP);
   pinMode(pinB, INPUT_PULLUP);
@@ -298,7 +300,7 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(pinA), handleEncoder, CHANGE);
   attachInterrupt(digitalPinToInterrupt(pinB), handleEncoder, CHANGE);
 
-  lcd.print("AUTO-CUT V1.0");
+  lcd.print("AUTO-CUT UNO");
   delay(900);
   lcd.clear();
 }
