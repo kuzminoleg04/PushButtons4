@@ -5,7 +5,8 @@ LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
 
 const int pinA = 2;
 const int pinB = 3;
-const int btnSetTarget = 13;
+const int btnTargetUp = 13;
+const int btnTargetDown = 6;
 const int btnResetDist = 4;
 
 const int btnHold = 5;  // This is now your "Ready for Next Piece" button
@@ -31,7 +32,8 @@ void setup() {
   lcd.begin(16, 2);
   pinMode(pinA, INPUT_PULLUP);
   pinMode(pinB, INPUT_PULLUP);
-  pinMode(btnSetTarget, INPUT_PULLUP);
+  pinMode(btnTargetUp, INPUT_PULLUP);
+  pinMode(btnTargetDown, INPUT_PULLUP);
   pinMode(btnResetDist, INPUT_PULLUP);
   pinMode(btnHold, INPUT_PULLUP);
 
@@ -62,10 +64,15 @@ void loop() {
     paused = true;  // LOCK the measurement immediately
   }
 
-  // 2. TARGET SCALE (Button 13)
-  if (digitalRead(btnSetTarget) == LOW) {
+  // 2. TARGET SCALE (Buttons 13 and 6)
+  if (digitalRead(btnTargetUp) == LOW) {
     targetCM += 10;
     if (targetCM > 200) targetCM = 10;
+    delay(250);
+  }
+  if (digitalRead(btnTargetDown) == LOW) {
+    targetCM -= 10;
+    if (targetCM < 10) targetCM = 200;
     delay(250);
   }
 
